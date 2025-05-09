@@ -2,21 +2,21 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from "@angular/core";
 
-import { PostService } from "src/app/Services/post.service";
-import { HomeComponent } from "./home.component";
 
-import { PostDTO } from "src/app/Models/post.dto";
+import { CategoryService } from 'src/app/Services/category.service';
+import { CategoriesListComponent } from './categories-list.component';
+import { CategoryDTO } from 'src/app/Models/category.dto';
 import { of } from "rxjs";
 
  
 
-describe('EJ: HomeComponent', () => {
+describe('EJERCICIO 5- CategoriesListComponent', () => {
 
     // Variable component de tipo Homecomponent
-    let component: HomeComponent;
+    let component: CategoriesListComponent;
 
     // 'fixture' para gestionar luego el componente.
-    let fixture: ComponentFixture<HomeComponent>;
+    let fixture: ComponentFixture<CategoriesListComponent>;
 
     // Antes de cada test
     beforeEach(() => {
@@ -27,11 +27,11 @@ describe('EJ: HomeComponent', () => {
             imports:  [ HttpClientTestingModule ],
 
             // ponemos el/los componente/s a testear
-            declarations: [ HomeComponent ],
+            declarations: [ CategoriesListComponent ],
 
             // dependencias (normalmente los servicios que tenga inyectados el componente en su constructor)
-            // en este caso solo nos haría falta inyectar el servicio PostService
-            providers: [ PostService ],
+            // en este caso solo nos haría falta inyectar el servicio CategoryService
+            providers: [ CategoryService ],
 
             // se poner para evitar errores
             schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ]
@@ -43,7 +43,7 @@ describe('EJ: HomeComponent', () => {
 
     // Antes de cada test: iniciamos el componente
     beforeEach(() => {
-        fixture = TestBed.createComponent(HomeComponent);
+        fixture = TestBed.createComponent(CategoriesListComponent);
         component = fixture.componentInstance;
 
         // hacemos que se instancie el componente y con el detectChanges es como si pasara por el ngOnInit
@@ -51,33 +51,37 @@ describe('EJ: HomeComponent', () => {
     });
 
     // TEST 1: Que se cree correctamente el componente
-    it('TEST 1- Debería crearse HomeComponent', () => {
+    it('TEST 1: Componente creado', () => {
         expect(component).toBeTruthy();
     });
 
     // TEST 2: Carga correcta de los POST's
-    it('TEST 2- LoadPost Suscripcion con éxito', () => {
+    it('TEST 2: loadCategories Suscripción creado con éxito', () => {
         // Definimos la dependencia del servicio
-        const postService = fixture.debugElement.injector.get(PostService);
+        const catService = fixture.debugElement.injector.get(CategoryService);
 
-        // Lista de posts 'mock', en este ejemplo simplemente utilizamos una lista vacía
-        const listPosts: PostDTO[] = [];
+        // Lista de categorías 'mock', en este ejemplo simplemente utilizamos una lista vacía
+        const listCats: CategoryDTO[] = [];
 
-        // espía para simular el método getPosts del servicio
+        // espía para simular el método getCategoriesByUserId del servicio
         // Le decimos que nos devolverá una lista de posts y que será un observable, de ahí que utilizemos (of)
-        const spy = spyOn(postService, 'getPosts').and.returnValue(of(listPosts));
+        const spy = spyOn(catService, 'getCategoriesByUserId').and.returnValue(of(listCats));
 
-        // Llamamos al método privado loadPosts del componente HomeComponent
-        component['loadPosts']();
+        catService.getCategoriesByUserId('1');
+        // Llamamos al método privado loadCategories del componente categories-list.component
+        // component['loadCategories']();
+        
 
         // Que esperamos?? esperamos que el getPosts del PostService sea llamado.
         expect(spy).toHaveBeenCalled();
+        // expect(spy).toHaveBeenCalledWith('1');
 
         // Que esperamos???
-        // Esperamos que la variable posts del HomeComponent donde se mapea el resultado de la llamada anterior tenga el numero de posts correcto,
+        // Esperamos que la variable cats del HomeComponent donde se mapea el resultado de la llamada anterior tenga el numero de posts correcto,
         // en este caso, como listPosts "mock" tiene 0 posts, el resultado esperado debe ser 0.
-        expect(component.posts.length).toBe(0);
+        expect(component.categories.length).toBe(0);
     });
-
+//https://stackoverflow.com/questions/67829672/angular-spyon-service-with-another-parameter
+//https://github.com/codecraft-tv/angular-course/blob/current/13.unit-testing/4.mocks-and-spies/code/app/login.component.spec.ts
     //it('test', () => {});
 });

@@ -11,7 +11,7 @@ import { HeaderComponent } from "./header.component";
 class TemporalComponentForRoutes {}
  
 
-describe('2- Test Rutas: HeaderComponent', () => {
+describe('EJERCICIO 2- Test Rutas: HeaderComponent', () => {
 
     // Variable component de tipo HeaderComponent
     let component: HeaderComponent;

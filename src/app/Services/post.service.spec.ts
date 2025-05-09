@@ -61,7 +61,7 @@ const post: PostDTO[] = [{
     "userAlias": "andrea",
 }];
 
-describe('3B- TEST SERVICIOS: PostService', () => {
+describe('EJERCICIO 3B- TEST SERVICIOS: PostService', () => {
 
     // Variable service de tipo CategoryService para llamar a las diferentes funciones del servicio
     let service: PostService;
@@ -181,17 +181,3 @@ describe('3B- TEST SERVICIOS: PostService', () => {
     });
 
 });
-
-/*
-  likePost(postId: string): Observable<updateResponse> {
-    return this.http
-      .put<updateResponse>(this.urlBlogUocApi + '/like/' + postId, NONE_TYPE)
-      .pipe(catchError(this.sharedService.handleError));
-  }
-
-  dislikePost(postId: string): Observable<updateResponse> {
-    return this.http
-      .put<updateResponse>(this.urlBlogUocApi + '/dislike/' + postId, NONE_TYPE)
-      .pipe(catchError(this.sharedService.handleError));
-  }
-*/

@@ -1,6 +1,6 @@
 import { FormatDatePipe } from "./format-date.pipe";
 
-describe('1- Test Pipe: FormatDatePipe', () => {
+describe('EJERCICIO 1- Test Pipe: FormatDatePipe', () => {
     // Declaramos la variable de tipo FormatDatePipe;
     let pipe: FormatDatePipe;    
     

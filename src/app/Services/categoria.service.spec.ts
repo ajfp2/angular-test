@@ -50,7 +50,7 @@ export interface deleteTestResponse {
   affected: number;
 }
 
-describe('3A- TEST SERVICIOS: CategoryService', () => {
+describe('EJERCICIO 3A- TEST SERVICIOS: CategoryService', () => {
 
     // Variable service de tipo CategoryService para llamar a las diferentes funciones del servicio
     let service: CategoryService;
