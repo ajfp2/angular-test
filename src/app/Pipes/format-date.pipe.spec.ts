@@ -6,18 +6,28 @@ describe('1- Test Pipe: FormatDatePipe', () => {
     
 
     const date: Date = new Date('11/11/2011');
-    const salidas = ['11112011', '11 / 11 / 2011', '11/11/2011', '2011-11-11'];
+    const salidas: string[] = ['', '11112011', '11 / 11 / 2011', '11/11/2011', '2011-11-11'];
 
     // Declaramos de cada test la instancia
     beforeEach(() => {
         pipe = new FormatDatePipe();
     });
 
-    // TEST 1: Que el pipe se cree correctamente
-    it('TEST 1: Pipe DateFormat Creado', () => {
+    // TEST 0: Que el pipe se cree correctamente
+    it('TEST 0: Pipe DateFormat Creado', () => {
         expect(pipe).toBeTruthy();
     });
 
+
+    for(let i = 1; i < 5; i++){
+        // TEST i: Formato suma
+        it('TEST '+ i +': Formato Salida ('+salidas[i]+')', () => {
+                
+            const result = pipe.transform(date , i);
+            expect(result).toBe(salidas[i]);
+        });
+    }
+    /*
     // TEST 2: Formato suma
     it('TEST 2: Suma (dd+mm+yyyy)', () => {
         
@@ -42,5 +52,5 @@ describe('1- Test Pipe: FormatDatePipe', () => {
         const result = pipe.transform(date , 4);
         expect(result).toBe(salidas[3]);
     });
-
+*/
 });
